@@ -5,10 +5,10 @@ import os
 import logic
 from clean import format_rust_files
 from file_io import goto_folder
-from logic import generate_tests
+from logic import generate_tests, get_module_name
 
 
-def generate_unit_tests(module: {}, root: str) -> None:
+def generate_unit_tests(modules: list[{}], root: str) -> None:
     # capture current working directory
     cwd = os.path.realpath(os.path.curdir)
 
@@ -16,7 +16,8 @@ def generate_unit_tests(module: {}, root: str) -> None:
     goto_folder(root)
 
     # generate tests
-    generate_tests(module)
+    for module in modules:
+        generate_tests(module)
 
     # return to starting working directory
     os.chdir(cwd)
@@ -52,6 +53,8 @@ if __name__ == '__main__':
     if args.clean:
         # clean/re-format definitions json
         print('Clean Test Definitions')
+
+        definitions.sort(key=lambda module: get_module_name(module))
 
         with open(args.definitions, 'w') as json_file:
             json.dump(definitions, json_file, indent=4, sort_keys=True)

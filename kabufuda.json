@@ -1,699 +1,701 @@
-{
-    "module": "pieces",
-    "module_mappings": {
-        "err": {
-            "name": "err",
-            "test": {
-                "expected": "Err(%(expected)s)",
-                "post_test": "\n\nlet expected = %(sut)s;\n\nassert_eq!(expected, sut);"
-            }
-        },
-        "ok": {
-            "name": "ok",
-            "test": {
-                "expected": "Ok(%(expected)s)",
-                "post_test": "\n\nlet expected = %(post)s;\n\nassert_eq!(expected, sut);",
-                "should": true
-            }
-        },
-        "put": {
-            "modules": [
-                "err",
-                "ok"
-            ],
-            "name": "put",
-            "test": {
-                "action": "put",
-                "actual": "sut.put(input)"
-            }
-        },
-        "take": {
-            "modules": [
-                "err",
-                "ok"
-            ],
-            "name": "take",
-            "test": {
-                "action": "take",
-                "actual": "sut.take(input)"
-            }
-        }
-    },
-    "modules": [
-        {
-            "module": "column",
-            "modules": [
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Cards",
-                                    "post": "Column::Cards(todo!())"
-                                },
-                                "a_remaining": {
-                                    "ok_label": "Complete",
-                                    "post": "Column::Complete(Card(todo!()))"
-                                },
-                                "less_than_a_remaining": {
-                                    "ok_label": "Cards",
-                                    "post": "Column::Cards(todo!())"
-                                }
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Empty",
-                                    "post": "Column::Empty"
-                                }
-                            }
-                        }
-                    },
-                    "module": "card",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "1"
-                        },
-                        "given": "a_single_card",
-                        "sut": "Column::Cards(vec![Card(%(card)s)])"
-                    }
-                },
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Cards",
-                                    "post": "Column::Cards(todo!())"
-                                },
-                                "a_remaining": {
-                                    "ok_label": "Complete",
-                                    "post": "Column::Complete(Card(todo!()))"
-                                },
-                                "less_than_a_remaining": {
-                                    "ok_label": "Cards",
-                                    "post": "Column::Cards(todo!())"
-                                }
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Card",
-                                    "post": "Column::Cards(todo!())"
-                                },
-                                "less_than_a_remaining": {
-                                    "ok_label": "Empty",
-                                    "post": "Column::Empty"
-                                }
-                            }
-                        }
-                    },
-                    "module": "partial",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "2"
-                        },
-                        "given": "a_partial",
-                        "sut": "Column::Cards(vec![Card(%(card)s); 2])"
-                    }
-                },
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Cards",
-                                    "post": "Column::Cards(todo!())"
-                                },
-                                "a_remaining": {
-                                    "ok_label": "Complete",
-                                    "post": "Column::Complete(Card(todo!()))"
-                                },
-                                "less_than_a_remaining": {
-                                    "ok_label": "Cards",
-                                    "post": "Column::Cards(todo!())"
-                                }
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Card",
-                                    "post": "Column::Cards(todo!())"
-                                },
-                                "less_than_a_remaining": {
-                                    "ok_label": "Empty",
-                                    "post": "Column::Empty"
-                                }
-                            }
-                        }
-                    },
-                    "module": "multi_partial",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "2"
-                        },
-                        "given": "a_multi_partial",
-                        "sut": "Column::Cards(vec![Card(0), Card(%(card)s), Card(%(card)s)])"
-                    }
-                },
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_zero": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_card": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_zero": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_full": {
-                                    "ok_label": "Empty",
-                                    "post": "Column::Empty"
-                                },
-                                "less_than_a_remaining": {
-                                    "ok_label": "Cards",
-                                    "post": "Column::Cards(todo!())"
-                                }
-                            }
-                        }
-                    },
-                    "module": "full_set",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "4"
-                        },
-                        "given": "a_full",
-                        "sut": "Column::Cards(vec![Card(0), Card(%(card)s), Card(%(card)s), Card(%(card)s), Card(%(card)s)])"
-                    }
-                },
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            }
-                        }
-                    },
-                    "module": "complete",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "4"
-                        },
-                        "given": "a_complete",
-                        "sut": "Column::Complete(Card(%(card)s))"
-                    }
-                },
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_zero": {},
-                                "more_than_a_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Card",
-                                    "post": "Column::Cards(todo!())"
-                                },
-                                "a_full": {
-                                    "ok_label": "Complete",
-                                    "post": "Column::Complete(Card(todo!()))"
-                                },
-                                "less_than_a_remaining": {
-                                    "ok_label": "Cards",
-                                    "post": "Column::Cards(todo!())"
-                                }
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_zero": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {}
-                            }
-                        }
-                    },
-                    "module": "empty",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "0"
-                        },
-                        "given": "an_empty",
-                        "sut": "Column::Empty"
-                    }
+[
+    {
+        "module": "pieces",
+        "module_mappings": {
+            "err": {
+                "name": "err",
+                "test": {
+                    "expected": "Err(%(expected)s)",
+                    "post_test": "\n\nlet expected = %(sut)s;\n\nassert_eq!(expected, sut);"
                 }
-            ],
-            "test": {
-                "code": [
-                    "use crate::game::{Column, CardsStack};",
-                    "use crate::consts::FULL_SET;"
-                ],
-                "given": "column"
-            }
-        },
-        {
-            "module": "slot",
-            "modules": [
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_remaining": {
-                                    "ok_label": "Complete",
-                                    "post": "Slot::Complete(Card(todo!()))"
-                                }
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Empty",
-                                    "post": "Slot::Empty"
-                                }
-                            }
-                        }
-                    },
-                    "module": "card",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "1"
-                        },
-                        "given": "a_card",
-                        "sut": "Slot::Card(Card(%(card)s))"
-                    }
-                },
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_new_card": {},
-                                "a_new_full": {},
-                                "a_new_remaining": {},
-                                "a_new_zero": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_new_remaining": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {},
-                                "more_than_a_new_full": {}
-                            }
-                        }
-                    },
-                    "module": "complete",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "4"
-                        },
-                        "given": "a_complete",
-                        "sut": "Slot::Complete(Card(%(card)s))"
-                    }
-                },
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {}
-                            },
-                            "ok": {
-                                "a_card": {
-                                    "ok_label": "Card",
-                                    "post": "Slot::Card(Card(todo!()))"
-                                },
-                                "a_full": {
-                                    "ok_label": "Complete",
-                                    "post": "Slot::Complete(Card(todo!()))"
-                                }
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {}
-                            }
-                        }
-                    },
-                    "module": "empty",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "0"
-                        },
-                        "given": "an_empty",
-                        "sut": "Slot::Empty"
-                    }
-                },
-                {
-                    "applied_scenarios": {
-                        "put": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {}
-                            }
-                        },
-                        "take": {
-                            "err": {
-                                "a_card": {},
-                                "a_full": {},
-                                "a_remaining": {},
-                                "a_zero": {},
-                                "less_than_a_remaining": {},
-                                "more_than_a_full": {}
-                            }
-                        }
-                    },
-                    "module": "locked",
-                    "modules": [
-                        "put",
-                        "take"
-                    ],
-                    "test": {
-                        "args": {
-                            "num_of_cards": "0"
-                        },
-                        "given": "a_locked",
-                        "sut": "Slot::Locked"
-                    }
+            },
+            "ok": {
+                "name": "ok",
+                "test": {
+                    "expected": "Ok(%(expected)s)",
+                    "post_test": "\n\nlet expected = %(post)s;\n\nassert_eq!(expected, sut);",
+                    "should": true
                 }
-            ],
-            "test": {
-                "code": [
-                    "use crate::game::{CardsStack, Slot};",
-                    "use crate::consts::FULL_SET;"
+            },
+            "put": {
+                "modules": [
+                    "err",
+                    "ok"
                 ],
-                "given": "slot"
+                "name": "put",
+                "test": {
+                    "action": "put",
+                    "actual": "sut.put(input)"
+                }
+            },
+            "take": {
+                "modules": [
+                    "err",
+                    "ok"
+                ],
+                "name": "take",
+                "test": {
+                    "action": "take",
+                    "actual": "sut.take(input)"
+                }
             }
-        }
-    ],
-    "scenarios": {
-        "formatting": {
-            "err": "ERR",
-            "ok": "__%(ok_label)s__"
         },
-        "ordered_labels": [
+        "modules": [
             {
-                "doc_label": "Zero",
-                "variant": "a_zero"
+                "module": "column",
+                "modules": [
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Cards",
+                                        "post": "Column::Cards(todo!())"
+                                    },
+                                    "a_remaining": {
+                                        "ok_label": "Complete",
+                                        "post": "Column::Complete(Card(todo!()))"
+                                    },
+                                    "less_than_a_remaining": {
+                                        "ok_label": "Cards",
+                                        "post": "Column::Cards(todo!())"
+                                    }
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Empty",
+                                        "post": "Column::Empty"
+                                    }
+                                }
+                            }
+                        },
+                        "module": "card",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "1"
+                            },
+                            "given": "a_single_card",
+                            "sut": "Column::Cards(vec![Card(%(card)s)])"
+                        }
+                    },
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Cards",
+                                        "post": "Column::Cards(todo!())"
+                                    },
+                                    "a_remaining": {
+                                        "ok_label": "Complete",
+                                        "post": "Column::Complete(Card(todo!()))"
+                                    },
+                                    "less_than_a_remaining": {
+                                        "ok_label": "Cards",
+                                        "post": "Column::Cards(todo!())"
+                                    }
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Card",
+                                        "post": "Column::Cards(todo!())"
+                                    },
+                                    "less_than_a_remaining": {
+                                        "ok_label": "Empty",
+                                        "post": "Column::Empty"
+                                    }
+                                }
+                            }
+                        },
+                        "module": "partial",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "2"
+                            },
+                            "given": "a_partial",
+                            "sut": "Column::Cards(vec![Card(%(card)s); 2])"
+                        }
+                    },
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Cards",
+                                        "post": "Column::Cards(todo!())"
+                                    },
+                                    "a_remaining": {
+                                        "ok_label": "Complete",
+                                        "post": "Column::Complete(Card(todo!()))"
+                                    },
+                                    "less_than_a_remaining": {
+                                        "ok_label": "Cards",
+                                        "post": "Column::Cards(todo!())"
+                                    }
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Card",
+                                        "post": "Column::Cards(todo!())"
+                                    },
+                                    "less_than_a_remaining": {
+                                        "ok_label": "Empty",
+                                        "post": "Column::Empty"
+                                    }
+                                }
+                            }
+                        },
+                        "module": "multi_partial",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "2"
+                            },
+                            "given": "a_multi_partial",
+                            "sut": "Column::Cards(vec![Card(0), Card(%(card)s), Card(%(card)s)])"
+                        }
+                    },
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_zero": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_zero": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_full": {
+                                        "ok_label": "Empty",
+                                        "post": "Column::Empty"
+                                    },
+                                    "less_than_a_remaining": {
+                                        "ok_label": "Cards",
+                                        "post": "Column::Cards(todo!())"
+                                    }
+                                }
+                            }
+                        },
+                        "module": "full_set",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "4"
+                            },
+                            "given": "a_full",
+                            "sut": "Column::Cards(vec![Card(0), Card(%(card)s), Card(%(card)s), Card(%(card)s), Card(%(card)s)])"
+                        }
+                    },
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                }
+                            }
+                        },
+                        "module": "complete",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "4"
+                            },
+                            "given": "a_complete",
+                            "sut": "Column::Complete(Card(%(card)s))"
+                        }
+                    },
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_zero": {},
+                                    "more_than_a_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Card",
+                                        "post": "Column::Cards(todo!())"
+                                    },
+                                    "a_full": {
+                                        "ok_label": "Complete",
+                                        "post": "Column::Complete(Card(todo!()))"
+                                    },
+                                    "less_than_a_remaining": {
+                                        "ok_label": "Cards",
+                                        "post": "Column::Cards(todo!())"
+                                    }
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_zero": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {}
+                                }
+                            }
+                        },
+                        "module": "empty",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "0"
+                            },
+                            "given": "an_empty",
+                            "sut": "Column::Empty"
+                        }
+                    }
+                ],
+                "test": {
+                    "code": [
+                        "use crate::game::{Column, CardsStack};",
+                        "use crate::consts::FULL_SET;"
+                    ],
+                    "given": "column"
+                }
             },
             {
-                "doc_label": "N Zero",
-                "variant": "a_new_zero"
-            },
-            {
-                "doc_label": "Card",
-                "variant": "a_card"
-            },
-            {
-                "doc_label": "N Card",
-                "variant": "a_new_card"
-            },
-            {
-                "doc_label": "< Remaining",
-                "variant": "less_than_a_remaining"
-            },
-            {
-                "doc_label": "< N Remaining",
-                "variant": "less_than_a_new_remaining"
-            },
-            {
-                "doc_label": "Remaining",
-                "variant": "a_remaining"
-            },
-            {
-                "doc_label": "N Remaining",
-                "variant": "a_new_remaining"
-            },
-            {
-                "doc_label": "Full set",
-                "variant": "a_full"
-            },
-            {
-                "doc_label": "N Full Set",
-                "variant": "a_new_full"
-            },
-            {
-                "doc_label": "Full Set+",
-                "variant": "more_than_a_full"
-            },
-            {
-                "doc_label": "N Full Set+",
-                "variant": "more_than_a_new_full"
+                "module": "slot",
+                "modules": [
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_remaining": {
+                                        "ok_label": "Complete",
+                                        "post": "Slot::Complete(Card(todo!()))"
+                                    }
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Empty",
+                                        "post": "Slot::Empty"
+                                    }
+                                }
+                            }
+                        },
+                        "module": "card",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "1"
+                            },
+                            "given": "a_card",
+                            "sut": "Slot::Card(Card(%(card)s))"
+                        }
+                    },
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_new_card": {},
+                                    "a_new_full": {},
+                                    "a_new_remaining": {},
+                                    "a_new_zero": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_new_remaining": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {},
+                                    "more_than_a_new_full": {}
+                                }
+                            }
+                        },
+                        "module": "complete",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "4"
+                            },
+                            "given": "a_complete",
+                            "sut": "Slot::Complete(Card(%(card)s))"
+                        }
+                    },
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {}
+                                },
+                                "ok": {
+                                    "a_card": {
+                                        "ok_label": "Card",
+                                        "post": "Slot::Card(Card(todo!()))"
+                                    },
+                                    "a_full": {
+                                        "ok_label": "Complete",
+                                        "post": "Slot::Complete(Card(todo!()))"
+                                    }
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {}
+                                }
+                            }
+                        },
+                        "module": "empty",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "0"
+                            },
+                            "given": "an_empty",
+                            "sut": "Slot::Empty"
+                        }
+                    },
+                    {
+                        "applied_scenarios": {
+                            "put": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {}
+                                }
+                            },
+                            "take": {
+                                "err": {
+                                    "a_card": {},
+                                    "a_full": {},
+                                    "a_remaining": {},
+                                    "a_zero": {},
+                                    "less_than_a_remaining": {},
+                                    "more_than_a_full": {}
+                                }
+                            }
+                        },
+                        "module": "locked",
+                        "modules": [
+                            "put",
+                            "take"
+                        ],
+                        "test": {
+                            "args": {
+                                "num_of_cards": "0"
+                            },
+                            "given": "a_locked",
+                            "sut": "Slot::Locked"
+                        }
+                    }
+                ],
+                "test": {
+                    "code": [
+                        "use crate::game::{CardsStack, Slot};",
+                        "use crate::consts::FULL_SET;"
+                    ],
+                    "given": "slot"
+                }
             }
         ],
-        "suffix": "stack",
-        "variants": {
-            "a_card": {
-                "data": "CardStack { card: Card(%(card)s), count: 1 }"
+        "scenarios": {
+            "formatting": {
+                "err": "ERR",
+                "ok": "__%(ok_label)s__"
             },
-            "a_full": {
-                "data": "CardStack { card: Card(%(card)s), count: FULL_SET }"
-            },
-            "a_new_card": {
-                "data": "CardStack { card: Card(%(new_card)s), count: 1 }"
-            },
-            "a_new_full": {
-                "data": "CardStack { card: Card(%(new_card)s), count: FULL_SET }"
-            },
-            "a_new_remaining": {
-                "data": "CardStack { card: Card(%(new_card)s), count: FULL_SET - %(num_of_cards)s }"
-            },
-            "a_new_zero": {
-                "data": "CardStack { card: Card(%(new_card)s), count: 0 }"
-            },
-            "a_remaining": {
-                "data": "CardStack { card: Card(%(card)s), count: FULL_SET - %(num_of_cards)s }"
-            },
-            "a_zero": {
-                "data": "CardStack { card: Card(%(card)s), count: 0 }"
-            },
-            "less_than_a_new_remaining": {
-                "data": "CardStack { card: Card(%(new_card)s), count: FULL_SET - %(num_of_cards)s - 1 }"
-            },
-            "less_than_a_remaining": {
-                "data": "CardStack { card: Card(%(card)s), count: FULL_SET - %(num_of_cards)s - 1 }"
-            },
-            "more_than_a_full": {
-                "data": "CardStack { card: Card(%(card)s), count: FULL_SET + 1 }"
-            },
-            "more_than_a_new_full": {
-                "data": "CardStack { card: Card(%(new_card)s), count: FULL_SET + 1 }"
+            "ordered_labels": [
+                {
+                    "doc_label": "Zero",
+                    "variant": "a_zero"
+                },
+                {
+                    "doc_label": "N Zero",
+                    "variant": "a_new_zero"
+                },
+                {
+                    "doc_label": "Card",
+                    "variant": "a_card"
+                },
+                {
+                    "doc_label": "N Card",
+                    "variant": "a_new_card"
+                },
+                {
+                    "doc_label": "< Remaining",
+                    "variant": "less_than_a_remaining"
+                },
+                {
+                    "doc_label": "< N Remaining",
+                    "variant": "less_than_a_new_remaining"
+                },
+                {
+                    "doc_label": "Remaining",
+                    "variant": "a_remaining"
+                },
+                {
+                    "doc_label": "N Remaining",
+                    "variant": "a_new_remaining"
+                },
+                {
+                    "doc_label": "Full set",
+                    "variant": "a_full"
+                },
+                {
+                    "doc_label": "N Full Set",
+                    "variant": "a_new_full"
+                },
+                {
+                    "doc_label": "Full Set+",
+                    "variant": "more_than_a_full"
+                },
+                {
+                    "doc_label": "N Full Set+",
+                    "variant": "more_than_a_new_full"
+                }
+            ],
+            "suffix": "stack",
+            "variants": {
+                "a_card": {
+                    "data": "CardStack { card: Card(%(card)s), count: 1 }"
+                },
+                "a_full": {
+                    "data": "CardStack { card: Card(%(card)s), count: FULL_SET }"
+                },
+                "a_new_card": {
+                    "data": "CardStack { card: Card(%(new_card)s), count: 1 }"
+                },
+                "a_new_full": {
+                    "data": "CardStack { card: Card(%(new_card)s), count: FULL_SET }"
+                },
+                "a_new_remaining": {
+                    "data": "CardStack { card: Card(%(new_card)s), count: FULL_SET - %(num_of_cards)s }"
+                },
+                "a_new_zero": {
+                    "data": "CardStack { card: Card(%(new_card)s), count: 0 }"
+                },
+                "a_remaining": {
+                    "data": "CardStack { card: Card(%(card)s), count: FULL_SET - %(num_of_cards)s }"
+                },
+                "a_zero": {
+                    "data": "CardStack { card: Card(%(card)s), count: 0 }"
+                },
+                "less_than_a_new_remaining": {
+                    "data": "CardStack { card: Card(%(new_card)s), count: FULL_SET - %(num_of_cards)s - 1 }"
+                },
+                "less_than_a_remaining": {
+                    "data": "CardStack { card: Card(%(card)s), count: FULL_SET - %(num_of_cards)s - 1 }"
+                },
+                "more_than_a_full": {
+                    "data": "CardStack { card: Card(%(card)s), count: FULL_SET + 1 }"
+                },
+                "more_than_a_new_full": {
+                    "data": "CardStack { card: Card(%(new_card)s), count: FULL_SET + 1 }"
+                }
+            }
+        },
+        "test": {
+            "args": {
+                "card": "3",
+                "expected": "todo!()",
+                "new_card": "2"
             }
         }
-    },
-    "test": {
-        "args": {
-            "card": "3",
-            "expected": "todo!()",
-            "new_card": "2"
-        }
     }
-}
+]

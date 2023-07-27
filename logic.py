@@ -63,7 +63,7 @@ def generate_tests(
     _validate_module(module)
 
     # get name of current module
-    module_name = _get_module_name(module)
+    module_name = get_module_name(module)
 
     # get test of current module
     module_test = _get_module_test(module, parent_test or {})
@@ -148,6 +148,11 @@ def generate_tests(
 
             if output_debugging:
                 print('%s}' % ('  ' * level))
+
+
+# gets the module name, either from name or module fields
+def get_module_name(module):
+    return module[NAME] if NAME in module else module[MODULE]
 
 
 # applies named arguments to string templates
@@ -271,7 +276,7 @@ def _create_test_doc_matrix(
             for module in lvl_modules:
                 # count the expected number of columns for module
                 columns = _columns_for_module(module, lvl_module_mappings)
-                module_name = _get_module_name(module)
+                module_name = get_module_name(module)
 
                 # get the doc line for the current level
                 level_line = doc[level]
@@ -328,7 +333,7 @@ def _create_test_doc_matrix(
                 # creates a label with everything that applies, if any
                 applies = ' ; '.join([
                     get_applied(lvl_applied[module][variant], module)
-                    for module in [_get_module_name(module) for module in lvl_modules]
+                    for module in [get_module_name(module) for module in lvl_modules]
                     if module in lvl_applied and variant in lvl_applied[module]
                 ])
 
@@ -399,7 +404,7 @@ fn {test_name}() {{\
     assert_eq!(expected, actual);\
     {post_test}\
 }}\n''', scenario_test_args
-            )
+                                                  )
         )
 
     # only generate tests if test definition contains all requisites
@@ -443,7 +448,7 @@ def _generate_tests_for_submodules(
 ):
     # loop through and generate test for each submodule
     for submodule in submodules:
-        submodule_name = _get_module_name(submodule)
+        submodule_name = get_module_name(submodule)
 
         # don't generate any tests if there aren't any applied test scenario variante
         if not applied == {} and submodule_name not in applied:
@@ -508,11 +513,6 @@ def _get_module_mappings(module: {}, parent_mappings: {}) -> {}:
             module_mappings[module_name] = additional_mappings[module_name]
 
     return module_mappings
-
-
-# gets the module name, either from name or module fields
-def _get_module_name(module):
-    return module[NAME] if NAME in module else module[MODULE]
 
 
 # get scenarios defined for a module
