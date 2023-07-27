@@ -6,17 +6,17 @@ from file_io import append_to_file, file_contains, goto_folder, go_back_a_folder
 # labels of fields in definitions object
 ACTION: str = 'action'
 APPLIED_SCENARIOS: str = 'applied_scenarios'
-APPLIED_SCENARIOS_PLUS: str = 'applied_scenarios+'
+APPLIED_SCENARIOS_PLUS: str = 'applied_scenarios_plus'
 FORMATTING: str = 'formatting'
 LABEL: str = 'doc_label'
 MAPPINGS: str = 'module_mappings'
-MAPPINGS_PLUS: str = 'module_mappings+'
+MAPPINGS_PLUS: str = 'module_mappings_plus'
 MODULE: str = 'module'
 MODULES: str = 'modules'
 NAME: str = 'name'
 ORDERED_LABELS: str = 'ordered_labels'
 SCENARIOS: str = 'scenarios'
-SCENARIOS_PLUS: str = 'scenarios+'
+SCENARIOS_PLUS: str = 'scenarios_plus'
 SUFFIX: str = 'suffix'
 TEST: str = 'test'
 TEST_ACTION: str = 'action'
@@ -417,7 +417,7 @@ fn {test_name}() {{\
     expected = module_test[TEST_EXPECTED]
     given = module_test[TEST_GIVEN]
     given = given if isinstance(given, str) else '_'.join(given)
-    should_or_not = module_test[TEST_SHOULD] if TEST_SHOULD in module_test else False
+    should_or_not = module_test[TEST_SHOULD] if TEST_SHOULD in module_test else True
     sut = module_test[TEST_SUT]
     suffix = scenarios[SUFFIX] if SUFFIX in scenarios else None
     scenario_variants = scenarios[VARIANTS]
