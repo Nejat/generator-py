@@ -14,7 +14,7 @@
                 "test": {
                     "expected": "Ok(%(expected)s)",
                     "post_test": "\n\nlet expected = %(post)s;\n\nassert_eq!(expected, sut);",
-                    "should": true
+                    "success": true
                 }
             },
             "put": {
